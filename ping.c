@@ -359,14 +359,14 @@ struct sockaddr_in *from;
 	if (cc < hlen + ICMP_MINLEN) {
 		if (pingflags & VERBOSE)
 			printf("packet too short (%d bytes) from %sn", cc,
-				inet_ntoa(ntohl(from->sin_addr))); /* DFM */
+				inet_ntoa(from->sin_addr)); /* DFM */
 		return;
 	}
 	cc -= hlen;
 	icp = (struct icmp *)(buf + hlen);
 	if( (!(pingflags & QUIET)) && icp->icmp_type != ICMP_ECHOREPLY )  {
 		printf("%d bytes from %s: icmp_type=%d (%s) icmp_code=%dn",
-		  cc, inet_ntoa(ntohl(from->sin_addr)),
+		  cc, inet_ntoa(from->sin_addr),
 		  icp->icmp_type, pr_type(icp->icmp_type), icp->icmp_code);/*DFM*/
 		if (pingflags & VERBOSE) {
 			for( i=0; i<12; i++)
